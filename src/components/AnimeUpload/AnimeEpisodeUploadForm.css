@@ -1,0 +1,24 @@
+.episode-form {
+  width: 40%;
+  background-color: #343a40;
+  padding: 30px 60px 50px 60px;
+  margin: 30px auto;
+  border-radius: 12px;
+  border: 1px black solid;
+  display: flex;
+  flex-direction: column;
+
+  color: #dee2e6;
+}
+
+.episode-form .anime-name {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+.episode-form .textfield {
+  margin-bottom: 16px;
+}

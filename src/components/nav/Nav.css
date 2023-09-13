@@ -1,0 +1,71 @@
+nav {
+  background-color: var(--secondary-color);
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+
+  padding: 1% 0;
+}
+
+nav h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--action-color);
+}
+
+.navlinks {
+  width: 40%;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+/* .navlinks .navlink {
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+.navlinks .navlink:hover {
+  color: var(--heading-color);
+}
+
+.navlinks .navlink:active,
+.navlinks .navlink.active {
+  color: var(--action-color);
+} */
+
+.navlinks a {
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+.navlinks a:hover {
+  color: var(--heading-color);
+}
+
+.navlinks a:active,
+.navlinks a.active {
+  color: var(--action-color);
+}
+.actions svg:hover {
+  color: var(--heading-color);
+  cursor: pointer;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: none;
+  color: var(--font-color);
+  padding-top: 0%;
+}
