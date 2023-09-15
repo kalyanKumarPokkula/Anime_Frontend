@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../home/Home.css";
 import Card from "../ui/Card";
 import axios from "axios";
+import BASE_URL from "../../config";
 
 function TvSeries() {
   const [animes, setanimes] = useState([]);
@@ -11,7 +12,7 @@ function TvSeries() {
     async function getAnimes() {
       try {
         let response = await axios.get(
-          `http://localhost:3001/api/v1/animes/${"Tv"}`
+          `${BASE_URL}/api/v1/animes/${"Tv"}`
         );
 
         console.log(response.data.data);
