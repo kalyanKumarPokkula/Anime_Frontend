@@ -65,7 +65,7 @@ function Nav() {
         <NavLink to="anime/tvSeries">Tv Series</NavLink>
         <NavLink to="anime/movies">Movies</NavLink>
         <NavLink to="anime/top10">Top10</NavLink>
-        <NavLink to="anime/trending">Trending</NavLink>
+        <NavLink to="anime/upload">Trending</NavLink>
       </div>
       <div className="actions">
         <button className="action-btn" onClick={modeChangeHandler}>
