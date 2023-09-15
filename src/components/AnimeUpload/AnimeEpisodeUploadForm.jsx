@@ -50,9 +50,7 @@ const AnimeEpisodeUploadForm = () => {
   useEffect(() => {
     async function getanime() {
       try {
-        let response = await axios.get(
-          `http://localhost:3001/api/v1/anime/${id}`
-        );
+        let response = await axios.get(`${BASE_URL}/api/v1/anime/${id}`);
 
         console.log(response.data.data);
         setAnime(response.data.data);
