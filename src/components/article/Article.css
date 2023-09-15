@@ -51,6 +51,21 @@
   display: flex;
 }
 
+.showless {
+  height: 110px;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+.showless::-webkit-scrollbar {
+  display: none;
+}
+
+.showless {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .moreinfo {
   width: 100%;
   display: flex;

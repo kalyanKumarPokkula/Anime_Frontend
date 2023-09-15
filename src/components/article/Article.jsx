@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Article.css";
 import axios from "axios";
+import BASE_URL from "../../config";
 
 function Article() {
   const { id } = useParams();
@@ -12,9 +13,7 @@ function Article() {
   useEffect(() => {
     async function getAnime() {
       try {
-        let response = await axios.get(
-          `http://localhost:3001/api/v1/anime/${id}`
-        );
+        let response = await axios.get(`${BASE_URL}/api/v1/anime/${id}`);
         console.log(response.data.data);
         setanimes(response.data.data);
       } catch (error) {
@@ -42,7 +41,7 @@ function Article() {
                 <span>
                   rating : <b>{anime.rating}</b>
                 </span>
-                <p>{anime.description}</p>
+                <p className="showless">{anime.description}</p>
                 <div className="info-about-anime">
                   <div className="moreinfo">
                     <span>Type : {anime.type.name}</span>
@@ -68,7 +67,7 @@ function Article() {
                   </button>
                   <button
                     className="watch-btn"
-                    onClick={() => navigator(`/anime/${anime._id}/ep-1`)}
+                    onClick={() => navigator(`/anime/episodes/${anime._id}`)}
                   >
                     Watch Now
                   </button>

@@ -6,7 +6,8 @@ import "./AnimeEpisodeUploadForm.css";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import { ProgressBar } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../config";
 
 const useStyles = makeStyles({
   root: {
@@ -33,9 +34,13 @@ const useStyles = makeStyles({
 const AnimeEpisodeUploadForm = () => {
   const classes = useStyles();
   const { id } = useParams();
+  const navigator = useNavigate();
   const [video, setVideo] = useState("");
+  const [episodeTitle, setEpisodeTitle] = useState("");
+  const [episodeNumber, setEpisodeNumber] = useState();
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const [successFullyUploaded, setSuccessfullyUploaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [anime, setAnime] = useState(null);
   const inputStyle = {
@@ -59,6 +64,54 @@ const AnimeEpisodeUploadForm = () => {
 
     getanime();
   }, []);
+
+  function submitHandler(e) {
+    e.preventDefault();
+    console.log(episodeNumber, episodeTitle, video);
+
+    if (!episodeTitle) {
+      console.log("please fill the episodeTitle");
+      return;
+    }
+
+    if (!episodeNumber) {
+      console.log("please fill the episode number");
+      return;
+    }
+
+    if (!video) {
+      console.log("please upload a video");
+      return;
+    }
+
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("episode", video);
+    formData.append("episodeTitle", episodeTitle.trim());
+    formData.append("episodeNumber", episodeNumber.trim());
+
+    async function uploadNewAnimeEpisode() {
+      try {
+        let response = await axios.post(
+          `${BASE_URL}/api/v1/anime/upload_episode/${id}`,
+          formData
+        );
+        console.log(response.data.data);
+        setUploading(false);
+        setSuccessfullyUploaded(true);
+        setTimeout(() => {
+          navigator(`/anime/${id}`);
+        }, 1000);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    uploadNewAnimeEpisode();
+
+    console.log(formData);
+  }
   return (
     <div>
       {isLoading && (
@@ -77,7 +130,10 @@ const AnimeEpisodeUploadForm = () => {
           <div className="anime-name">{anime.name}</div>
           {uploading && (
             <div>
-              <h4 style={{ fontWeight: "bold" }}> Uploading...</h4>
+              <h4 style={{ fontWeight: "bold", color: "#FF9E00" }}>
+                {" "}
+                Uploading...
+              </h4>
               <div
                 style={{
                   display: "flex",
@@ -89,7 +145,22 @@ const AnimeEpisodeUploadForm = () => {
               </div>
             </div>
           )}
-          {!uploading && (
+          {successFullyUploaded && (
+            <div>
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  marginTop: "24px",
+                  color: "green",
+                  fontSize: "2rem",
+                }}
+              >
+                {" "}
+                Successfully Uploaded
+              </h4>
+            </div>
+          )}
+          {!uploading && !successFullyUploaded && (
             <div>
               <div className="textfield">
                 <TextField
@@ -99,7 +170,7 @@ const AnimeEpisodeUploadForm = () => {
                   fullWidth={true}
                   InputProps={{ sx: { height: 50 }, style: inputStyle }}
                   className={classes.root}
-                  // onChange={e => setStatus(e.target.value)}
+                  onChange={e => setEpisodeTitle(e.target.value)}
                 />
               </div>
               <div className="textfield">
@@ -111,7 +182,7 @@ const AnimeEpisodeUploadForm = () => {
                   type="Number"
                   InputProps={{ sx: { height: 50 }, style: inputStyle }}
                   className={classes.root}
-                  // onChange={e => setStatus(e.target.value)}
+                  onChange={e => setEpisodeNumber(e.target.value)}
                 />
               </div>
 
@@ -181,6 +252,7 @@ const AnimeEpisodeUploadForm = () => {
                   InputProps={{ sx: { height: 50 } }}
                   className={classes.root}
                   style={{ backgroundColor: "#FF9E00", marginTop: "12px" }}
+                  onClick={submitHandler}
                 >
                   submit
                 </Button>

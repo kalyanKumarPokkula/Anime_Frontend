@@ -18,7 +18,7 @@ function App() {
       <Nav />
       <main>
         <Routes>
-          <Route path="anime/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="anime/top10" element={<Top />} />
           <Route path="anime/trending" element={<Trending />} />
           <Route path="/anime/:id" element={<Article />} />
@@ -29,7 +29,7 @@ function App() {
             path="/anime/uploadEp/:id"
             element={<AnimeEpisodeUploadForm />}
           />
-          <Route path="/anime/:id/ep-1" element={<AnimeWatchPage />} />
+          <Route path="/anime/episodes/:id" element={<AnimeWatchPage />} />
         </Routes>
       </main>
     </div>

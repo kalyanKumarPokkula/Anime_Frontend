@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../home/Home.css";
 import axios from "axios";
 import Card from "../ui/Card";
+import BASE_URL from "../../config";
 
 function Movies() {
   const [animes, setanimes] = useState([]);
@@ -10,9 +11,7 @@ function Movies() {
   useEffect(() => {
     async function getAnimes() {
       try {
-        let response = await axios.get(
-          `http://localhost:3001/api/v1/animes/${"Movie"}`
-        );
+        let response = await axios.get(`${BASE_URL}/api/v1/animes/${"Movie"}`);
 
         console.log(response.data.data);
         setanimes([...response.data.data]);

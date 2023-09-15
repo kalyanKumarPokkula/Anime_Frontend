@@ -61,7 +61,7 @@ function Nav() {
     <nav>
       <h2>ANIMEdn59</h2>
       <div className="navlinks">
-        <NavLink to="anime/">Home</NavLink>
+        <NavLink to="/">Home</NavLink>
         <NavLink to="anime/tvSeries">Tv Series</NavLink>
         <NavLink to="anime/movies">Movies</NavLink>
         <NavLink to="anime/top10">Top10</NavLink>

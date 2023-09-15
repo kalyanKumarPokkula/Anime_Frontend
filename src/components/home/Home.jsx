@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import axios from "axios";
 import Card from "../ui/Card";
+import BASE_URL from "../../config";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -21,7 +22,7 @@ function Home() {
   useEffect(() => {
     async function getAnimes() {
       try {
-        let response = await axios.get(`http://localhost:3001/api/v1/anime`);
+        let response = await axios.get(`${BASE_URL}/api/v1/anime`);
 
         console.log(response.data.data);
         shuffleArray(response.data.data);

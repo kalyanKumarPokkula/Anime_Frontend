@@ -1,15 +1,25 @@
-.episode-box {
+.episode-box a {
   width: 60px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ff9e00;
+  border: 1px solid #212529;
   background-color: #343a40;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.episode-box:hover {
+.episode-box a:hover {
   background-color: #212529;
+  border-color: #ff9e00;
+}
+
+.episode-box a:active,
+.episode-box a:active {
+  background-color: #ff9e00;
+}
+
+.episode-box a:focus {
+  background-color: #ff9e00;
 }

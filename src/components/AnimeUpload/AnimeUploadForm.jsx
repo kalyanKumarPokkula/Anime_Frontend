@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
+import BASE_URL from "../../config";
 
 const useStyles = makeStyles({
   root: {
@@ -113,7 +114,7 @@ function AnimeUploadForm() {
     }
 
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("images", image);
     formData.append("genre", genre);
     formData.append("rating", rating.trim());
     formData.append("episodes", episodes.trim());
@@ -125,12 +126,13 @@ function AnimeUploadForm() {
     formData.append("description", description.trim());
     formData.append("name", name.trim());
 
-    async function uploadFrom() {
+    async function uploadNewAnime() {
       try {
-        let response = await axios.post(
-          "http://localhost:3001/api/v1/animes",
-          formData
-        );
+        let response = await axios.post(`${BASE_URL}/api/v1/animes`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         console.log(response.data.data);
         navigator(`/anime/${response.data.data._id}`);
       } catch (error) {
@@ -138,7 +140,7 @@ function AnimeUploadForm() {
       }
     }
 
-    uploadFrom();
+    uploadNewAnime();
 
     console.log(formData);
   }
@@ -231,10 +233,20 @@ function AnimeUploadForm() {
               InputProps={{ sx: { height: 50 } }}
               className={classes.root}
               style={{ backgroundColor: "#FF9E00" }}
-              onChange={e => setImage(e.target.files[0])}
+              onChange={e => {
+                const files = e.target.files[0];
+                console.log(files);
+                setImage(files);
+              }}
             >
               Upload
-              <input hidden accept="image/*" multiple type="file" />
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                name="images"
+                multiple
+              />
             </Button>
           </div>
         </div>
